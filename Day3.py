@@ -3,7 +3,7 @@ import math
 
 df=pd.read_csv(r'C:\Users\clivo\OneDrive\Desktop\Advent\Day3.txt',header=None)
 
-def advent3(x,y):
+def count_trees(x,y):
     dataset = df*int(math.ceil(((x*len(df))/y)/len(df[0][0])))
     data=[]
     if y % 2 == 1:
@@ -12,10 +12,10 @@ def advent3(x,y):
             data.append(text[(i)*x])
     if y % 2 == 0:
         for i in dataset.index:
-            if i%2 == 0:
+            if i%y == 0:
                 text = dataset[0][i]
-                data.append(text[int(i/2)])
+                data.append(text[int(i/y)*x])
     return data.count('#')
 
-print('Part 1 =',advent3(3,1))
-print('Part 2 =',advent3(1,1)*advent3(3,1)*advent3(5,1)*advent3(7,1)*advent3(1,2))
+print('Part 1 =',count_trees(3,1))
+print('Part 2 =',count_trees(1,1)*count_trees(3,1)*count_trees(5,1)*count_trees(7,1)*count_trees(1,2))
